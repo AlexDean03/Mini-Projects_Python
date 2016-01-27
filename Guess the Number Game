@@ -1,0 +1,79 @@
+# template for "Guess the number" mini-project
+# input will come from buttons and an input field
+# all output for the game will be printed in the console
+import simplegui 
+import random
+import math
+
+
+secret_number = 1
+num_guesses = 7 or 10
+
+# helper function to start and restart the game
+
+def new_game():
+    
+    # initialize global variables used in your code here
+    global secret_number 
+    secret_number = random.randrange (0,100)
+    return secret_number
+    pass
+
+
+# define event handlers for control panel
+def range100():
+    global num_guesses
+    num_guesses = 7
+    global secret_number
+    range_num = new_game ()
+    print  "New game. Range is from 0 to 100"
+    print "Number of remaining guesses is", num_guesses
+    print "     "
+    # button that changes the range to [0,100) and starts a new game 
+    
+       
+    pass
+
+def range1000():
+    # button that changes the range to [0,1000) and starts a new game     
+    global num_guesses
+    num_guesses = 10
+    global secret_number
+    range_num = new_game ()
+    print  "New game. Range is from 0 to 1000"
+    print "Number of remaining guesses is", num_guesses
+    pass
+    
+def input_guess(guess):
+    # main game logic goes here	
+    global num_guesses 
+    global secret_number
+    inp = int (guess)
+    print "Guess was", guess
+   
+    num_guesses = num_guesses - 1
+    print "Number of remaining guesses is", num_guesses
+    if inp > secret_number:
+        print "Lower!"
+    elif inp < secret_number:
+        print "Higher!"
+    else:
+        print "Correct!"
+        return  new_game()
+    print "    "
+    pass
+
+    
+# create frame
+frame = simplegui.create_frame('Guess the number', 200, 200)
+
+# register event handlers for control elements and start frame
+button1 = frame.add_button('Range is [0, 100]',range100 , 200)
+button2 = frame.add_button('Range is [0, 1000]',range1000 , 200)
+inp = frame.add_input('Enter a guess',input_guess , 200)
+
+# call new_game 
+new_game()
+
+
+# always remember to check your completed program against the grading rubric
